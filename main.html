@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarah & James | Wedding</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sage: #9CAF88;
+            --sage-dark: #7A9B6C;
+            --pink: #E8B4B8;
+            --pink-light: #F5D5D8;
+            --blue: #A8C7D9;
+            --peach: #F5B895;
+            --accent: #F9F5F0;
+            --text: #3d3d3d;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: linear-gradient(to bottom, #fdfbf7 0%, #f9f5f0 50%, #fdfbf7 100%);
+            position: relative;
+        }
+
+        /* Elegant subtle background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(156, 175, 136, 0.03) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(232, 180, 184, 0.03) 0%, transparent 25%),
+                radial-gradient(circle at 50% 60%, rgba(168, 199, 217, 0.03) 0%, transparent 25%),
+                radial-gradient(circle at 20% 80%, rgba(245, 184, 149, 0.03) 0%, transparent 25%),
+                radial-gradient(circle at 80% 85%, rgba(156, 175, 136, 0.03) 0%, transparent 25%);
+            opacity: 0.6;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        nav {
+            background: var(--white);
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--sage);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--sage);
+        }
+
+        .header-title {
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+            background: var(--white);
+        }
+
+        .header-title h1 {
+            font-size: 4rem;
+            font-family: 'Didot', 'Bodoni MT', 'Garamond', serif;
+            color: var(--sage-dark);
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-title .ampersand {
+            font-size: 3.5rem;
+            margin: 0 1.5rem;
+            font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+            font-style: italic;
+            color: var(--pink);
+        }
+
+        .wedding-date {
+            font-size: 1.3rem;
+            color: var(--text);
+            letter-spacing: 3px;
+            margin-top: 1rem;
+            opacity: 0.8;
+        }
+
+        .photo-marquee {
+            background: #f5f5f5;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+            height: 550px;
+        }
+
+        .marquee-container {
+            display: flex;
+            animation: scroll 40s linear infinite;
+            height: 100%;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .marquee-item {
+            flex-shrink: 0;
+            width: 700px;
+            height: 550px;
+            margin: 0;
+            background: linear-gradient(135deg, var(--pink) 0%, var(--peach) 50%, var(--sage) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .page {
+            display: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 3.5rem;
+            text-align: center;
+            color: var(--sage-dark);
+            margin-bottom: 3rem;
+            font-family: 'Didot', 'Bodoni MT', 'Garamond', serif;
+            font-weight: 300;
+            letter-spacing: 3px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '✿';
+            display: block;
+            font-size: 1.5rem;
+            color: var(--pink);
+            margin-top: 0.5rem;
+        }
+
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .story-text {
+            font-size: 1.2rem;
+            line-height: 1.9;
+        }
+
+        .story-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--sage) 0%, var(--blue) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .photo-item {
+            height: 350px;
+            background: linear-gradient(135deg, var(--pink) 0%, var(--peach) 50%, var(--sage) 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .photo-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .detail-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            text-align: center;
+            border: 1px solid rgba(156, 175, 136, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+        }
+
+        .detail-card h3 {
+            color: var(--sage-dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .detail-card p {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .registry-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .registry-btn {
+            display: block;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--sage) 0%, var(--sage-dark) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.3rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 20px rgba(156, 175, 136, 0.3);
+        }
+
+        .registry-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(156, 175, 136, 0.4);
+        }
+
+        .rsvp-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 3.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(156, 175, 136, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            font-weight: bold;
+            font-size: 1.05rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid rgba(156, 175, 136, 0.2);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--sage);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        button {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--sage) 0%, var(--sage-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 20px rgba(156, 175, 136, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(156, 175, 136, 0.4);
+        }
+
+        .admin-section {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-top: 4rem;
+            border: 1px solid rgba(156, 175, 136, 0.1);
+        }
+
+        .guest-list {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .guest-item {
+            padding: 1.2rem;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-attending {
+            color: var(--sage-dark);
+            font-weight: bold;
+        }
+
+        .status-declined {
+            color: #c77;
+            font-weight: bold;
+        }
+
+        #successMessage {
+            display: none;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #e8f5e9;
+            border-radius: 10px;
+            color: var(--sage-dark);
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+            @media (max-width: 768px) {
+            .header-title h1 {
+                font-size: 2.5rem;
+            }
+            .story-content {
+                grid-template-columns: 1fr;
+            }
+            h2 {
+                font-size: 2.2rem;
+            }
+            nav ul {
+                gap: 1.5rem;
+            }
+            .marquee-item {
+                width: 500px;
+                height: 400px;
+            }
+            .photo-marquee {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
+            <li><a href="#story" class="nav-link" data-page="story">Our Story</a></li>
+            <li><a href="#photos" class="nav-link" data-page="photos">Photos</a></li>
+            <li><a href="#details" class="nav-link" data-page="details">Details</a></li>
+            <li><a href="#registry" class="nav-link" data-page="registry">Registry</a></li>
+            <li><a href="#rsvp" class="nav-link" data-page="rsvp">RSVP</a></li>
+        </ul>
+    </nav>
+
+    <div class="header-title">
+        <h1>
+            Sarah <span class="ampersand">&</span> James
+        </h1>
+        <div class="wedding-date">JUNE 15, 2026</div>
+    </div>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <div class="photo-marquee">
+            <div class="marquee-container" id="marqueeContainer">
+                <div class="marquee-item">[Photo 1]</div>
+                <div class="marquee-item">[Photo 2]</div>
+                <div class="marquee-item">[Photo 3]</div>
+                <div class="marquee-item">[Photo 4]</div>
+                <div class="marquee-item">[Photo 5]</div>
+                <div class="marquee-item">[Photo 6]</div>
+                <!-- Duplicate for seamless loop -->
+                <div class="marquee-item">[Photo 1]</div>
+                <div class="marquee-item">[Photo 2]</div>
+                <div class="marquee-item">[Photo 3]</div>
+                <div class="marquee-item">[Photo 4]</div>
+                <div class="marquee-item">[Photo 5]</div>
+                <div class="marquee-item">[Photo 6]</div>
+            </div>
+        </div>
+        <section>
+            <h2>Welcome to Our Wedding</h2>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center; background: white; padding: 4rem 3rem; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.08);">
+                <p style="font-size: 1.3rem; line-height: 2; margin-bottom: 2rem;">
+                    We are so excited to celebrate our special day with you! Join us as we begin our journey together surrounded by the people we love most.
+                </p>
+                <p style="font-size: 1.2rem; line-height: 1.9; color: var(--sage-dark);">
+                    <strong>Saturday, June 15, 2026</strong><br>
+                    Riverside Gardens, Portland, OR<br>
+                    Ceremony at 3:00 PM
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <!-- STORY PAGE -->
+    <div id="story" class="page">
+        <section>
+            <h2>Our Story</h2>
+            <div class="story-content">
+                <div class="story-text">
+                    <p>We met on a rainy Tuesday at a coffee shop downtown. James was reading a book that Sarah had been meaning to pick up, and she couldn't help but comment on it. What started as a conversation about literature turned into hours of talking about everything and nothing.</p>
+                    <br>
+                    <p>Five years later, James proposed at that same coffee shop, on another rainy Tuesday. It was perfect, just like every day we've spent together since.</p>
+                </div>
+                <div class="story-image">
+                    [Your Photo Here]
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PHOTOS PAGE -->
+    <div id="photos" class="page">
+        <section>
+            <h2>Our Journey</h2>
+            <div class="photo-gallery">
+                <div class="photo-item">[Photo 1]</div>
+                <div class="photo-item">[Photo 2]</div>
+                <div class="photo-item">[Photo 3]</div>
+                <div class="photo-item">[Photo 4]</div>
+                <div class="photo-item">[Photo 5]</div>
+                <div class="photo-item">[Photo 6]</div>
+                <div class="photo-item">[Photo 7]</div>
+                <div class="photo-item">[Photo 8]</div>
+                <div class="photo-item">[Photo 9]</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- DETAILS PAGE -->
+    <div id="details" class="page">
+        <section>
+            <h2>Wedding Details</h2>
+            <div class="details-grid">
+                <div class="detail-card">
+                    <h3>📍 Ceremony</h3>
+                    <p><strong>Riverside Gardens</strong></p>
+                    <p>123 Garden Lane</p>
+                    <p>Portland, OR 97201</p>
+                    <p>3:00 PM</p>
+                </div>
+                <div class="detail-card">
+                    <h3>🎉 Reception</h3>
+                    <p><strong>The Grand Ballroom</strong></p>
+                    <p>456 Celebration Ave</p>
+                    <p>Portland, OR 97201</p>
+                    <p>5:00 PM - 11:00 PM</p>
+                </div>
+                <div class="detail-card">
+                    <h3>👔 Dress Code</h3>
+                    <p><strong>Semi-Formal</strong></p>
+                    <p>Cocktail attire requested</p>
+                    <p>Garden party vibes!</p>
+                </div>
+                <div class="detail-card">
+                    <h3>🏨 Accommodations</h3>
+                    <p><strong>Hotel Portland</strong></p>
+                    <p>789 Stay Street</p>
+                    <p>Use code: SARAHJAMES</p>
+                    <p>for discounted rates</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- REGISTRY PAGE -->
+    <div id="registry" class="page">
+        <section>
+            <h2>Registry</h2>
+            <div class="registry-links">
+                <a href="#" class="registry-btn">View our Amazon Registry</a>
+                <a href="#" class="registry-btn">View our Zola Registry</a>
+                <a href="#" class="registry-btn">View our Target Registry</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- RSVP PAGE -->
+    <div id="rsvp" class="page">
+        <section>
+            <h2>RSVP</h2>
+            <div class="rsvp-form">
+                <form id="rsvpForm">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="attending">Will you be attending? *</label>
+                        <select id="attending" required>
+                            <option value="">Please select</option>
+                            <option value="yes">Joyfully accepts!</option>
+                            <option value="no">Regretfully declines</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="guests">Number of Guests</label>
+                        <input type="number" id="guests" min="1" max="10" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="dietary">Dietary Restrictions</label>
+                        <textarea id="dietary" placeholder="Please let us know of any dietary restrictions or allergies"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message to the Couple</label>
+                        <textarea id="message" placeholder="We'd love to hear from you!"></textarea>
+                    </div>
+                    <button type="submit">Submit RSVP</button>
+                </form>
+                <div id="successMessage">
+                    Thank you for your RSVP! We can't wait to celebrate with you! 💕
+                </div>
+            </div>
+
+            <div class="admin-section">
+                <h3 style="text-align: center; margin-bottom: 1rem; color: var(--sage-dark); font-size: 1.8rem;">Guest List (Admin View)</h3>
+                <div style="text-align: center; margin-bottom: 1rem;">
+                    <button onclick="loadGuestList()" style="width: auto; padding: 0.75rem 2.5rem;">Refresh Guest List</button>
+                </div>
+                <div class="guest-list" id="guestList">
+                    <p style="text-align: center; color: #666;">No RSVPs yet. Guest responses will appear here.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Page navigation
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pages = document.querySelectorAll('.page');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetPage = link.getAttribute('data-page');
+                
+                // Remove active class from all links and pages
+                navLinks.forEach(l => l.classList.remove('active'));
+                pages.forEach(p => p.classList.remove('active'));
+                
+                // Add active class to clicked link and corresponding page
+                link.classList.add('active');
+                document.getElementById(targetPage).classList.add('active');
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // RSVP Form handling
+        const form = document.getElementById('rsvpForm');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                attending: document.getElementById('attending').value,
+                guests: document.getElementById('guests').value,
+                dietary: document.getElementById('dietary').value,
+                message: document.getElementById('message').value,
+                timestamp: new Date().toISOString()
+            };
+
+            try {
+                const rsvpKey = `rsvp:${Date.now()}`;
+                await window.storage.set(rsvpKey, JSON.stringify(formData));
+                
+                form.style.display = 'none';
+                successMessage.style.display = 'block';
+                
+                await loadGuestList();
+            } catch (error) {
+                alert('Sorry, there was an error submitting your RSVP. Please try again.');
+                console.error('RSVP error:', error);
+            }
+        });
+
+        // Load and display guest list
+        async function loadGuestList() {
+            const guestListDiv = document.getElementById('guestList');
+            
+            try {
+                const result = await window.storage.list('rsvp:');
+                
+                if (!result || !result.keys || result.keys.length === 0) {
+                    guestListDiv.innerHTML = '<p style="text-align: center; color: #666;">No RSVPs yet. Guest responses will appear here.</p>';
+                    return;
+                }
+
+                let guestHTML = '';
+                let attendingCount = 0;
+                let declinedCount = 0;
+                let totalGuests = 0;
+
+                for (const key of result.keys) {
+                    try {
+                        const guestData = await window.storage.get(key);
+                        if (guestData && guestData.value) {
+                            const guest = JSON.parse(guestData.value);
+                            const statusClass = guest.attending === 'yes' ? 'status-attending' : 'status-declined';
+                            const statusText = guest.attending === 'yes' ? 'Attending' : 'Declined';
+                            
+                            if (guest.attending === 'yes') {
+                                attendingCount++;
+                                totalGuests += parseInt(guest.guests) || 1;
+                            } else {
+                                declinedCount++;
+                            }
+
+                            guestHTML += `
+                                <div class="guest-item">
+                                    <div>
+                                        <strong>${guest.name}</strong><br>
+                                        <small>${guest.email}</small><br>
+                                        ${guest.attending === 'yes' ? `Guests: ${guest.guests}` : ''}
+                                        ${guest.dietary ? `<br><small>Dietary: ${guest.dietary}</small>` : ''}
+                                        ${guest.message ? `<br><small>Message: ${guest.message}</small>` : ''}
+                                    </div>
+                                    <div class="${statusClass}">${statusText}</div>
+                                </div>
+                            `;
+                        }
+                    } catch (e) {
+                        console.log('Could not load guest:', key);
+                    }
+                }
+
+                const summaryHTML = `
+                    <div style="background: #e8f5e9; padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; text-align: center;">
+                        <strong>Summary:</strong> ${attendingCount} Attending (${totalGuests} total guests) | ${declinedCount} Declined
+                    </div>
+                `;
+
+                guestListDiv.innerHTML = summaryHTML + guestHTML;
+            } catch (error) {
+                console.log('Guest list will populate after first RSVP');
+                guestListDiv.innerHTML = '<p style="text-align: center; color: #666;">No RSVPs yet. Guest responses will appear here.</p>';
+            }
+        }
+
+        loadGuestList();
+    </script>
+</body
