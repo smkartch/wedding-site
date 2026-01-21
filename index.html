@@ -169,6 +169,25 @@
             opacity: 0.5;
         }
 
+        /* Vision Section */
+        .vision-section {
+            max-width: 800px;
+            margin: 6rem auto;
+            padding: 0 3rem;
+            text-align: center;
+        }
+
+        .vision-section h2 {
+            margin-bottom: 2rem;
+        }
+
+        .vision-section p {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: var(--dark);
+            text-align: left;
+        }
+
         /* Marquee Photo Banner */
         .marquee-section {
             background: var(--white);
@@ -657,6 +676,12 @@
     </div>
 </div>
 
+<div class="vision-section">
+    <h2>Our Vision</h2>
+    <div class="divider"></div>
+    <p>We're so excited to celebrate with you! We see this day not only as a chance to commemorate the joining of two families, but also as moment to show appreciation for all of you! Neither of us would be here without the support each of you has shown us along the way. We've been blessed by your friendships, guidance, listening ears, encouragement, laughter, and love so freely given. They say it takes a village to raise a person, and as we looked over all the invitations for this event, we were overcome with gratitude for the villages that raised us. Our hope is that this wedding feels like a small way to give back to the people we love most, and a chance for you to simply come, relax, and be celebrated too.</p>
+</div>
+
 <section id="details">
     <h2>Reception Details</h2>
     <p class="section-subtitle">Join us for a celebration</p>
@@ -676,26 +701,26 @@
         <h2>RSVP</h2>
         <p class="section-subtitle">Please let us know by April 30, 2026</p>
         <div class="rsvp-form">
-            <form id="rsvpForm">
+            <form id="rsvpForm" action="https://docs.google.com/forms/d/e/1FAIpQLSfzFtRlQ0Q1bN8UEie1ZWE_18sckRGsDUuFLVognvVJfESAKg/formResponse" method="POST" target="hidden_iframe">
                 <div class="form-group">
                     <label for="name">Full Name(s)</label>
-                    <input type="text" id="name" required placeholder="Your name(s)">
+                    <input type="text" id="name" name="entry.206150193" required placeholder="Your name(s)">
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" required placeholder="your@email.com">
+                    <input type="email" id="email" name="entry.676341780" required placeholder="your@email.com">
                 </div>
 
                 <div class="form-group">
                     <label>Can you make it?</label>
                     <div class="radio-group">
                         <label>
-                            <input type="radio" name="attending" value="yes" required>
+                            <input type="radio" name="entry.448583835" value="Can't wait!" required>
                             Can't wait!
                         </label>
                         <label>
-                            <input type="radio" name="attending" value="no" required>
+                            <input type="radio" name="entry.448583835" value="Sorry, can't make it" required>
                             Sorry, can't make it
                         </label>
                     </div>
@@ -703,22 +728,23 @@
 
                 <div class="form-group">
                     <label for="guests">Number of Guests Attending</label>
-                    <select id="guests">
+                    <select id="guests" name="entry.929993994">
                         <option value="1">1 Guest</option>
                         <option value="2">2 Guests</option>
                         <option value="3">3 Guests</option>
                         <option value="4">4 Guests</option>
+                        <option value="5">5 Guests</option>
+                        <option value="6">6 Guests</option>
+                        <option value="7">7 Guests</option>
+                        <option value="8">8 Guests</option>
+                        <option value="9">9 Guests</option>
+                        <option value="10">10 Guests</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="dietary">Dietary Restrictions or Allergies</label>
-                    <textarea id="dietary" rows="3" placeholder="Please let us know of any dietary needs or allergies..."></textarea>
-                </div>
-
-                <div class="form-group">
                     <label for="message">Leave us a note (Optional)</label>
-                    <textarea id="message" rows="4" placeholder="We'd love to hear from you..."></textarea>
+                    <textarea id="message" name="entry.1387729167" rows="4" placeholder="We'd love to hear from you..."></textarea>
                 </div>
 
                 <button type="submit">Submit Response</button>
@@ -726,6 +752,7 @@
                     Thank you for your response! We look forward to celebrating with you.
                 </div>
             </form>
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
         </div>
     </div>
 </section>
