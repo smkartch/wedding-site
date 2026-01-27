@@ -39,28 +39,46 @@
 
         /* Hero Section */
         .hero {
-            min-height: 60vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 4rem 2rem;
+            padding: 2rem;
             position: relative;
-            background: linear-gradient(to bottom, var(--white) 0%, var(--cream) 100%);
+            background: var(--cream);
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 4rem);
+            max-width: 1400px;
+            height: calc(100% - 2rem);
+            background: linear-gradient(to bottom, var(--white) 0%, var(--cream) 100%);
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 4rem);
+            max-width: 1400px;
+            height: calc(100% - 2rem);
             background-image:
                     radial-gradient(circle at 20% 50%, rgba(139, 157, 131, 0.03) 0%, transparent 50%),
                     radial-gradient(circle at 80% 80%, rgba(212, 165, 165, 0.03) 0%, transparent 50%);
             pointer-events: none;
+            border-radius: 8px 8px 0 0;
         }
 
         .hero-content {
@@ -143,51 +161,6 @@
             text-transform: uppercase;
             margin-bottom: 4rem;
             font-size: 0.9rem;
-        }
-
-        /* Autocomplete Dropdown */
-        .autocomplete-dropdown {
-            position: absolute;
-            background: white;
-            border: 1px solid #D8D5CE;
-            border-top: none;
-            border-radius: 0 0 2px 2px;
-            max-height: 300px;
-            overflow-y: auto;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            display: none;
-        }
-
-        .autocomplete-dropdown.show {
-            display: block;
-        }
-
-        .autocomplete-item {
-            padding: 1rem 1.2rem;
-            cursor: pointer;
-            transition: background 0.2s;
-            border-bottom: 1px solid #F0EDE7;
-        }
-
-        .autocomplete-item:hover {
-            background: var(--cream);
-        }
-
-        .autocomplete-item:last-child {
-            border-bottom: none;
-        }
-
-        .autocomplete-item .street {
-            font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 0.3rem;
-        }
-
-        .autocomplete-item .city-state {
-            font-size: 0.9rem;
-            color: #666;
         }
 
         .form-group {
@@ -295,6 +268,51 @@
             }
         }
 
+        /* Autocomplete Dropdown */
+        .autocomplete-dropdown {
+            position: absolute;
+            background: white;
+            border: 1px solid #D8D5CE;
+            border-top: none;
+            border-radius: 0 0 2px 2px;
+            max-height: 300px;
+            overflow-y: auto;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .autocomplete-dropdown.show {
+            display: block;
+        }
+
+        .autocomplete-item {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-bottom: 1px solid #F0EDE7;
+        }
+
+        .autocomplete-item:hover {
+            background: var(--cream);
+        }
+
+        .autocomplete-item:last-child {
+            border-bottom: none;
+        }
+
+        .autocomplete-item .street {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .autocomplete-item .city-state {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
         /* Success Message */
         .success-message {
             display: none;
@@ -310,62 +328,6 @@
         .success-message.show {
             display: block;
             animation: slideIn 0.5s ease;
-        }
-
-        /* Validation Messages */
-        .validation-message {
-            display: none;
-            padding: 1rem;
-            border-radius: 2px;
-            margin-top: 1rem;
-            font-size: 0.95rem;
-        }
-
-        .validation-message.show {
-            display: block;
-            animation: slideIn 0.3s ease;
-        }
-
-        .validation-message.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .validation-message.warning {
-            background: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeaa7;
-        }
-
-        .validation-message.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .loading {
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
-        .suggested-address {
-            background: var(--cream);
-            padding: 1rem;
-            border-radius: 2px;
-            margin-top: 1rem;
-            border-left: 3px solid var(--sage);
-        }
-
-        .suggested-address p {
-            margin: 0.5rem 0;
-        }
-
-        .suggested-address button {
-            margin-top: 1rem;
-            width: auto;
-            padding: 0.8rem 2rem;
-            font-size: 1rem;
         }
 
         @keyframes slideIn {
@@ -518,7 +480,7 @@
 
 <script>
     // Smarty API Configuration - Use Embedded Key
-    const SMARTY_EMBEDDED_KEY = '203191916732930264'; // Smarty Embedded Key
+    const SMARTY_EMBEDDED_KEY = '203191916732930264';
 
     // Handle conditional fields based on announcement preference
     const physicalRadio = document.getElementById('physicalRadio');
