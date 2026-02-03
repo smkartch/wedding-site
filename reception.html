@@ -214,13 +214,27 @@
 
         .marquee-item {
             flex-shrink: 0;
-            width: 500px;
-            height: 550px;
+            width: 700px;
+            height: 750px;
             margin: 0;
             background: var(--light-gray);
             overflow: hidden;
             position: relative;
             box-shadow: none;
+        }
+
+        @media (max-width: 768px) {
+            .marquee-item {
+                width: 400px;
+                height: 450px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .marquee-item {
+                width: 320px;
+                height: 380px;
+            }
         }
 
         .marquee-item::after {
@@ -567,7 +581,7 @@
 
             .marquee-item {
                 width: 280px;
-                height: 200px;
+                height: 400px;
             }
 
             .details-grid {
