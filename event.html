@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaylee & Paul - May 30, 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sage: #5F7355;
+            --pink: #E8A5AA;
+            --blue: #9DB4C4;
+            --peach: #E8B4A0;
+            --cream: #F8F6F2;
+            --white: #FFFFFF;
+            --dark: #2C2C2C;
+            --light-gray: #F0EDE7;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            color: var(--dark);
+            background-color: var(--cream);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        /* Tier Visibility */
+        [data-tier] {
+            display: none;
+        }
+
+        .tier-ceremony [data-tier="ceremony"],
+        .tier-family [data-tier="ceremony"],
+        .tier-family [data-tier="family"] {
+            display: block;
+        }
+
+        /* Schedule items and nav links use different display types */
+        .tier-ceremony li[data-tier="ceremony"],
+        .tier-family li[data-tier="ceremony"],
+        .tier-family li[data-tier="family"] {
+            display: list-item;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 3rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 3rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 3.5rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background: var(--sage);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--sage);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            background: linear-gradient(to bottom, var(--white) 0%, var(--cream) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                    radial-gradient(circle at 20% 50%, rgba(139, 157, 131, 0.03) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(212, 165, 165, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 5.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 300;
+            line-height: 1.2;
+        }
+
+        .hero .ampersand {
+            display: block;
+            font-size: 4rem;
+            color: var(--sage);
+            margin: 1.5rem 0;
+            font-style: italic;
+        }
+
+        .hero .tagline {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-top: 2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        .hero .date {
+            font-size: 1.8rem;
+            margin-top: 3rem;
+            color: var(--sage);
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: var(--sage);
+            margin: 2rem auto;
+            opacity: 0.5;
+        }
+
+        /* Vision Section */
+        .vision-section {
+            max-width: 800px;
+            margin: 6rem auto;
+            padding: 0 3rem;
+            text-align: center;
+        }
+
+        .vision-section h2 {
+            margin-bottom: 2rem;
+        }
+
+        .vision-section p {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: var(--dark);
+            text-align: left;
+        }
+
+        /* Marquee Photo Banner */
+        .marquee-section {
+            background: var(--white);
+            padding: 6rem 0;
+            margin: 5rem 0;
+            position: relative;
+            box-shadow:
+                    0 -1px 0 rgba(139, 157, 131, 0.1),
+                    0 1px 0 rgba(139, 157, 131, 0.1);
+        }
+
+        .marquee-container {
+            overflow: hidden;
+        }
+
+        .marquee {
+            display: flex;
+            animation: scroll 40s linear infinite;
+        }
+
+        .marquee:hover {
+            animation-play-state: paused;
+        }
+
+        .marquee-item {
+            flex-shrink: 0;
+            width: 700px;
+            height: 750px;
+            margin: 0;
+            background: var(--light-gray);
+            overflow: hidden;
+            position: relative;
+            box-shadow: none;
+        }
+
+        /* Mobile responsive sizing for marquee */
+        @media (max-width: 768px) {
+            .marquee-item {
+                width: 400px;
+                height: 450px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .marquee-item {
+                width: 320px;
+                height: 380px;
+            }
+        }
+
+        .marquee-item::after {
+            content: 'Add your photo here';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(44, 44, 44, 0.3);
+            font-size: 0.9rem;
+            text-align: center;
+            font-style: italic;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Sections */
+        section:not(#rsvp) {
+            max-width: 1100px;
+            margin: 6rem auto;
+            padding: 0 3rem;
+        }
+
+        h2 {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 300;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--sage);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 4rem;
+            font-size: 0.9rem;
+        }
+
+        /* Details Grid */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .detail-card {
+            background: var(--white);
+            padding: 3rem 2.5rem;
+            border-radius: 2px;
+            box-shadow: 0 2px 30px rgba(0,0,0,0.06);
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+        }
+
+        .detail-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background: var(--sage);
+        }
+
+        .detail-card:nth-child(2)::before { background: var(--pink); }
+        .detail-card:nth-child(3)::before { background: var(--blue); }
+
+        .detail-card h3 {
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 400;
+        }
+
+        .detail-card p {
+            margin: 0.5rem 0;
+            font-size: 1.05rem;
+        }
+
+        .detail-card strong {
+            color: var(--sage);
+            font-weight: 600;
+            font-size: 1.15rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Schedule */
+        .schedule-timeline {
+            max-width: 700px;
+            margin: 3rem auto;
+            position: relative;
+        }
+
+        .schedule-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom,
+            var(--sage), var(--pink), var(--blue), var(--peach));
+            opacity: 0.3;
+        }
+
+        .schedule-item {
+            background: var(--white);
+            padding: 2rem 2.5rem;
+            border-radius: 2px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+            position: relative;
+            width: calc(50% - 2rem);
+            transition: transform 0.3s ease;
+        }
+
+        .schedule-item:hover {
+            transform: translateX(-5px);
+        }
+
+        .schedule-item:nth-child(even) {
+            margin-left: auto;
+        }
+
+        .schedule-item:nth-child(even):hover {
+            transform: translateX(5px);
+        }
+
+        .schedule-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--sage);
+            border: 3px solid var(--white);
+            box-shadow: 0 0 0 3px var(--light-gray);
+        }
+
+        .schedule-item:nth-child(odd)::before {
+            right: -38px;
+        }
+
+        .schedule-item:nth-child(even)::before {
+            left: -38px;
+        }
+
+        .schedule-item:nth-child(2)::before { background: var(--pink); }
+        .schedule-item:nth-child(3)::before { background: var(--blue); }
+        .schedule-item:nth-child(4)::before { background: var(--peach); }
+        .schedule-item:nth-child(5)::before { background: var(--sage); }
+
+        .schedule-item h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 400;
+        }
+
+        .time {
+            color: var(--sage);
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .schedule-item p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            opacity: 0.85;
+        }
+
+        /* RSVP Form */
+        #rsvp {
+            background: var(--white);
+            padding: 5rem 0;
+            margin: 6rem 0;
+            box-shadow:
+                    0 -1px 0 rgba(139, 157, 131, 0.1),
+                    0 1px 0 rgba(139, 157, 131, 0.1);
+        }
+
+        .rsvp-form {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 1px solid #D8D5CE;
+            border-radius: 2px;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+            background: var(--cream);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--sage);
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(139, 157, 131, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button {
+            background: var(--sage);
+            color: white;
+            padding: 1.2rem 3.5rem;
+            border: none;
+            border-radius: 2px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        button:hover {
+            background: var(--dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 3rem;
+            margin-top: 1rem;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .radio-group input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        /* Invite Code Section */
+        .invite-code-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 3rem;
+            text-align: center;
+        }
+
+        .invite-prompt {
+            font-size: 0.85rem;
+            color: var(--dark);
+            opacity: 0.5;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            font-style: italic;
+        }
+
+        .invite-prompt:hover {
+            opacity: 0.8;
+        }
+
+        .invite-form {
+            display: none;
+            margin-top: 1rem;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .invite-form.show {
+            display: flex;
+        }
+
+        .invite-form input {
+            width: auto;
+            max-width: 200px;
+            padding: 0.5rem 0.8rem;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .invite-form button {
+            width: auto;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.9rem;
+        }
+
+        .invite-status {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--sage);
+            font-style: italic;
+        }
+
+        .invite-status .forget-link {
+            color: var(--dark);
+            opacity: 0.5;
+            cursor: pointer;
+            text-decoration: underline;
+            margin-left: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .invite-status .forget-link:hover {
+            opacity: 0.8;
+        }
+
+        .invite-error {
+            color: var(--pink);
+            font-style: normal;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--cream);
+            text-align: center;
+            padding: 4rem 2rem;
+            margin-top: 6rem;
+        }
+
+        footer p {
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+
+        footer p:last-child {
+            margin-top: 2rem;
+            opacity: 0.6;
+            font-size: 0.95rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            nav a {
+                font-size: 0.75rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero .ampersand {
+                font-size: 2.5rem;
+            }
+
+            .hero .date {
+                font-size: 1.4rem;
+            }
+
+            h2 {
+                font-size: 2.5rem;
+            }
+
+            section {
+                margin: 4rem auto;
+                padding: 0 1.5rem;
+            }
+
+            .marquee-item {
+                width: 280px;
+                height: 400px;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .schedule-timeline::before {
+                left: 0;
+            }
+
+            .schedule-item {
+                width: 100%;
+                margin-left: 2rem;
+                padding-left: 2rem;
+            }
+
+            .schedule-item:nth-child(even) {
+                margin-left: 2rem;
+            }
+
+            .schedule-item:nth-child(even):hover,
+            .schedule-item:hover {
+                transform: translateY(-5px);
+            }
+
+            .schedule-item::before {
+                left: -32px !important;
+            }
+
+            #rsvp {
+                padding: 3rem 1.5rem;
+            }
+
+            .radio-group {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .invite-form {
+                flex-direction: column;
+            }
+
+            .invite-form input {
+                max-width: 100%;
+            }
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: var(--sage);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 2px;
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+<nav id="navbar">
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#details">Details</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#rsvp">RSVP</a></li>
+    </ul>
+</nav>
+
+<section id="home" class="hero">
+    <div class="hero-content">
+        <h1>Shaylee</h1>
+        <span class="ampersand">&</span>
+        <h1>Paul</h1>
+        <div class="divider"></div>
+        <p class="tagline">Celebrate with us</p>
+        <p class="date">May 30, 2026</p>
+    </div>
+</section>
+
+<div class="marquee-section">
+    <div class="marquee-container">
+        <div class="marquee">
+            <div class="marquee-item"></div>
+            <div class="marquee-item"></div>
+            <div class="marquee-item"></div>
+            <div class="marquee-item"></div>
+            <div class="marquee-item"></div>
+            <div class="marquee-item"></div>
+            <div class="marquee-item"></div>
+            <div class="marquee-item"></div>
+            <!-- Duplicated for seamless loop -->
+            <div class="marquee-item"></div>
+            <div class="marquee-item"></div>
+            <div class="marquee-item"></div>
+            <div class="marquee-item"></div>
+            <div class="marquee-item"></div>
+            <div class="marquee-item"></div>
+            <div class="marquee-item"></div>
+            <div class="marquee-item"></div>
+        </div>
+    </div>
+</div>
+
+<div class="vision-section">
+    <h2>Our Vision</h2>
+    <div class="divider"></div>
+    <p>We're so excited to celebrate with you! We see this day not only as a chance to commemorate the joining of two families, but also as moment to show appreciation for all of you! Neither of us would be here without the support each of you has shown us along the way. We've been blessed by your friendships, guidance, listening ears, encouragement, laughter, and love so freely given. They say it takes a village to raise a person, and as we looked over all the invitations for this event, we were overcome with gratitude for the villages that raised us. Our hope is that this wedding feels like a small way to give back to the people we love most, and a chance for you to simply come, relax, and be celebrated too.</p>
+</div>
+
+<section id="details">
+    <h2>The Celebration</h2>
+    <p class="section-subtitle">Join us for a day of love and laughter</p>
+    <div class="details-grid">
+        <div class="detail-card" data-tier="family">
+            <h3>Luncheon</h3>
+            <strong>12:30 PM</strong>
+            <p>Shade Weddings and Events</p>
+            <p>435 S Geneva Rd</p>
+            <p>Orem, UT 84058</p>
+        </div>
+        <div class="detail-card" data-tier="ceremony">
+            <h3>Ceremony</h3>
+            <strong>3:30 PM</strong>
+            <p>Shade Weddings and Events</p>
+            <p>435 S Geneva Rd</p>
+            <p>Orem, UT 84058</p>
+        </div>
+        <div class="detail-card">
+            <h3>Reception</h3>
+            <strong>6:00 PM</strong>
+            <p>Shade Weddings and Events</p>
+            <p>435 S Geneva Rd</p>
+            <p>Orem, UT 84058</p>
+        </div>
+    </div>
+</section>
+
+<section id="schedule">
+    <h2>The Day's Events</h2>
+    <p class="section-subtitle">Here's what we have planned</p>
+    <div class="schedule-timeline">
+        <div class="schedule-item" data-tier="family">
+            <span class="time">12:30 PM</span>
+            <h3>Luncheon</h3>
+            <p>Join us for a meal before the festivities begin</p>
+        </div>
+        <div class="schedule-item" data-tier="ceremony">
+            <span class="time">3:30 PM</span>
+            <h3>Ceremony</h3>
+            <p>Come celebrate with us as we exchange vows surrounded by gardens and loved ones</p>
+        </div>
+        <div class="schedule-item">
+            <span class="time">6:00 – 7:30 PM</span>
+            <h3>Welcome &amp; Celebration</h3>
+            <p>Mingle, enjoy the evening, and help us celebrate the start of forever</p>
+        </div>
+        <div class="schedule-item">
+            <span class="time">7:30 – 8:00 PM</span>
+            <h3>Cake &amp; First Dances</h3>
+            <p>Cake cutting followed by our first dances as newlyweds</p>
+        </div>
+        <div class="schedule-item">
+            <span class="time">8:00 – 8:30 PM</span>
+            <h3>Dancing</h3>
+            <p>Hit the dance floor and celebrate with us</p>
+        </div>
+        <div class="schedule-item">
+            <span class="time">8:30 PM</span>
+            <h3>Send-Off</h3>
+            <p>A sparkler send-off under the stars</p>
+        </div>
+    </div>
+</section>
+
+<section id="rsvp">
+    <div style="max-width: 1100px; margin: 0 auto; padding: 0 3rem;">
+        <h2>RSVP</h2>
+        <p class="section-subtitle">Please let us know by April 30, 2026</p>
+        <div class="rsvp-form">
+            <form id="rsvpForm" action="https://docs.google.com/forms/d/e/1FAIpQLSfzFtRlQ0Q1bN8UEie1ZWE_18sckRGsDUuFLVognvVJfESAKg/formResponse" method="POST" target="hidden_iframe">
+                <div class="form-group">
+                    <label for="name">Full Name(s)</label>
+                    <input type="text" id="name" name="entry.206150193" required placeholder="Your name(s)">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="entry.676341780" required placeholder="your@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Can you make it?</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="entry.448583835" value="Can't wait!" required>
+                            Can't wait!
+                        </label>
+                        <label>
+                            <input type="radio" name="entry.448583835" value="Sorry, can't make it" required>
+                            Sorry, can't make it
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="guests">Number of Guests Attending</label>
+                    <select id="guests" name="entry.929993994">
+                        <option value="1">1 Guest</option>
+                        <option value="2">2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4 Guests</option>
+                        <option value="5">5 Guests</option>
+                        <option value="6">6 Guests</option>
+                        <option value="7">7 Guests</option>
+                        <option value="8">8 Guests</option>
+                        <option value="9">9 Guests</option>
+                        <option value="10">10 Guests</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Leave us a note (Optional)</label>
+                    <textarea id="message" name="entry.1387729167" rows="4" placeholder="We'd love to hear from you..."></textarea>
+                </div>
+
+                <button type="submit">Submit Response</button>
+                <div class="success-message" id="successMessage">
+                    Thank you for your response! We look forward to celebrating with you.
+                </div>
+            </form>
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+        </div>
+    </div>
+</section>
+
+<div class="invite-code-section" id="inviteCodeSection">
+    <span class="invite-prompt" id="invitePrompt">Have an invitation code?</span>
+    <div class="invite-form" id="inviteForm">
+        <input type="text" id="inviteCodeInput" placeholder="Enter code" autocomplete="off">
+        <button type="button" id="inviteSubmit">Submit</button>
+    </div>
+    <div class="invite-status" id="inviteStatus"></div>
+</div>
+
+<footer>
+    <p>We can't wait to celebrate with you!</p>
+    <div class="divider"></div>
+    <p>&copy; 2026 Shaylee & Paul · Orem, Utah</p>
+</footer>
+
+<script>
+    // Tier system
+    var CODES = {
+        'ceremony': 'ceremony',
+        'family': 'family'
+    };
+
+    var TIER_LEVELS = { 'reception': 0, 'ceremony': 1, 'family': 2 };
+
+    function getTier() {
+        var params = new URLSearchParams(window.location.search);
+        var invite = params.get('invite');
+        if (invite) {
+            var tier = CODES[invite.toLowerCase()];
+            if (tier) {
+                localStorage.setItem('weddingTier', tier);
+                return tier;
+            }
+        }
+        return localStorage.getItem('weddingTier') || 'reception';
+    }
+
+    function applyTier(tier) {
+        document.body.classList.remove('tier-ceremony', 'tier-family');
+        if (tier === 'ceremony' || tier === 'family') {
+            document.body.classList.add('tier-' + tier);
+        }
+        updateInviteUI(tier);
+    }
+
+    function updateInviteUI(tier) {
+        var prompt = document.getElementById('invitePrompt');
+        var form = document.getElementById('inviteForm');
+        var status = document.getElementById('inviteStatus');
+
+        if (tier === 'reception') {
+            prompt.style.display = '';
+            form.classList.remove('show');
+            status.innerHTML = '';
+        } else {
+            prompt.style.display = 'none';
+            form.classList.remove('show');
+            var label = tier === 'family' ? 'Family' : 'Ceremony';
+            status.innerHTML = label + ' access unlocked <span class="forget-link" id="forgetLink">forget code</span>';
+            document.getElementById('forgetLink').addEventListener('click', function() {
+                localStorage.removeItem('weddingTier');
+                // Remove invite param from URL without reload
+                var url = new URL(window.location);
+                url.searchParams.delete('invite');
+                window.history.replaceState({}, '', url);
+                applyTier('reception');
+            });
+        }
+    }
+
+    // Initialize tier on load
+    var currentTier = getTier();
+    applyTier(currentTier);
+
+    // Invite code prompt toggle
+    document.getElementById('invitePrompt').addEventListener('click', function() {
+        document.getElementById('inviteForm').classList.add('show');
+        document.getElementById('inviteCodeInput').focus();
+        this.style.display = 'none';
+    });
+
+    // Invite code submission
+    function submitInviteCode() {
+        var input = document.getElementById('inviteCodeInput');
+        var code = input.value.trim().toLowerCase();
+        var tier = CODES[code];
+        var status = document.getElementById('inviteStatus');
+
+        if (tier) {
+            localStorage.setItem('weddingTier', tier);
+            input.value = '';
+            applyTier(tier);
+            var details = document.getElementById('details');
+            var navHeight = document.getElementById('navbar').offsetHeight;
+            window.scrollTo({ top: details.offsetTop - navHeight, behavior: 'smooth' });
+        } else {
+            status.innerHTML = '<span class="invite-error">Code not recognized</span>';
+            setTimeout(function() {
+                if (status.querySelector('.invite-error')) {
+                    status.innerHTML = '';
+                }
+            }, 3000);
+        }
+    }
+
+    document.getElementById('inviteSubmit').addEventListener('click', submitInviteCode);
+    document.getElementById('inviteCodeInput').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            submitInviteCode();
+        }
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        var navbar = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Form submission
+    document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        var formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            attending: document.querySelector('input[name="entry.448583835"]:checked').value,
+            guests: document.getElementById('guests').value,
+            message: document.getElementById('message').value,
+            timestamp: new Date().toISOString()
+        };
+
+        console.log('RSVP Submission:', formData);
+
+        // Submit to Google Forms
+        var form = document.getElementById('rsvpForm');
+        var formDataToSend = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formDataToSend,
+            mode: 'no-cors'
+        }).then(function() {
+            // Show success message
+            var successMessage = document.getElementById('successMessage');
+            successMessage.classList.add('show');
+
+            // Reset form
+            form.reset();
+
+            // Hide success message after 5 seconds
+            setTimeout(function() {
+                successMessage.classList.remove('show');
+            }, 5000);
+        });
+    });
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            var target = document.querySelector(this.getAttribute('href'));
+            if (!target) return;
+            var navHeight = document.getElementById('navbar').offsetHeight;
+            var targetPosition = target.offsetTop - navHeight;
+
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+</body>
+</html>
