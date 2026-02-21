@@ -37,6 +37,24 @@
             letter-spacing: 0.5px;
         }
 
+        /* Tier Visibility */
+        [data-tier] {
+            display: none;
+        }
+
+        .tier-ceremony [data-tier="ceremony"],
+        .tier-family [data-tier="ceremony"],
+        .tier-family [data-tier="family"] {
+            display: block;
+        }
+
+        /* Schedule items and nav links use different display types */
+        .tier-ceremony li[data-tier="ceremony"],
+        .tier-family li[data-tier="ceremony"],
+        .tier-family li[data-tier="family"] {
+            display: list-item;
+        }
+
         /* Navigation */
         nav {
             position: fixed;
@@ -191,12 +209,10 @@
         /* Marquee Photo Banner */
         .marquee-section {
             background: var(--white);
-            padding: 6rem 0;
-            margin: 5rem 0;
+            padding: 6rem 0 2rem;
+            margin: 5rem 0 0;
             position: relative;
-            box-shadow:
-                    0 -1px 0 rgba(139, 157, 131, 0.1),
-                    0 1px 0 rgba(139, 157, 131, 0.1);
+            box-shadow: 0 -1px 0 rgba(139, 157, 131, 0.1);
         }
 
         .marquee-container {
@@ -256,7 +272,7 @@
         }
 
         /* Sections */
-        section:not(#rsvp) {
+        section:not(#rsvp):not(#registry) {
             max-width: 1100px;
             margin: 6rem auto;
             padding: 0 3rem;
@@ -283,10 +299,10 @@
         /* Details Grid */
         .details-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 3rem;
             margin-top: 3rem;
-            max-width: 800px;
+            max-width: 1000px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -526,6 +542,96 @@
             cursor: pointer;
         }
 
+        /* Invite Code Section */
+        .invite-code-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 3rem;
+            text-align: center;
+        }
+
+        .invite-prompt {
+            font-size: 1.05rem;
+            color: var(--dark);
+            opacity: 0.5;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            font-style: italic;
+        }
+
+        .invite-prompt:hover {
+            opacity: 0.8;
+        }
+
+        .invite-form {
+            display: none;
+            margin-top: 1rem;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .invite-form.show {
+            display: flex;
+        }
+
+        .invite-form input {
+            width: auto;
+            max-width: 200px;
+            padding: 0.5rem 0.8rem;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .invite-form button {
+            width: auto;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.9rem;
+        }
+
+        .invite-status {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--sage);
+            font-style: italic;
+        }
+
+        .invite-status .forget-link {
+            color: var(--dark);
+            opacity: 0.5;
+            cursor: pointer;
+            text-decoration: underline;
+            margin-left: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .invite-status .forget-link:hover {
+            opacity: 0.8;
+        }
+
+        .invite-error {
+            color: var(--pink);
+            font-style: normal;
+        }
+
+        /* Floral Accents */
+        .hero-floral {
+            height: 120px;
+            opacity: 0.12;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: calc(100% + 1.5rem);
+        }
+
+        .footer-floral {
+            width: 70px;
+            opacity: 0.3;
+            margin-bottom: 1rem;
+            filter: invert(1);
+            mix-blend-mode: screen;
+        }
+
         /* Footer */
         footer {
             background: var(--dark);
@@ -613,14 +719,146 @@
                 left: -32px !important;
             }
 
-            #rsvp {
+            #rsvp,
+            #registry {
                 padding: 3rem 1.5rem;
+            }
+
+            .fund-grid {
+                grid-template-columns: 1fr;
             }
 
             .radio-group {
                 flex-direction: column;
                 gap: 1rem;
             }
+
+            .invite-form {
+                flex-direction: column;
+            }
+
+            .invite-form input {
+                max-width: 100%;
+            }
+
+            .hero-floral {
+                height: 80px;
+            }
+        }
+
+        /* Registry Section */
+        #registry {
+            background: var(--white);
+            padding: 2rem 0 5rem;
+            margin: 0 0 6rem;
+            box-shadow: 0 1px 0 rgba(139, 157, 131, 0.1);
+        }
+
+        .registry-intro {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.9;
+            opacity: 0.85;
+        }
+
+        .registry-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 500px;
+            margin: 0 auto 4rem;
+        }
+
+        .registry-card {
+            display: block;
+            background: var(--cream);
+            padding: 2.5rem 2rem;
+            border-radius: 2px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--dark);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .registry-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+        }
+
+        .registry-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .registry-card p {
+            font-size: 0.95rem;
+            color: var(--sage);
+            letter-spacing: 0.5px;
+        }
+
+        .fund-heading {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 300;
+        }
+
+        .fund-subtext {
+            text-align: center;
+            color: var(--sage);
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            margin-bottom: 2.5rem;
+        }
+
+        .fund-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .fund-card {
+            background: var(--cream);
+            padding: 2.5rem 1.5rem;
+            border-radius: 2px;
+            text-align: center;
+            position: relative;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .fund-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background: var(--sage);
+        }
+
+        .fund-card:nth-child(2)::before { background: var(--pink); }
+        .fund-card:nth-child(3)::before { background: var(--blue); }
+
+        .fund-card h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .fund-card p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            opacity: 0.8;
         }
 
         /* Success Message */
@@ -656,9 +894,11 @@
 <nav id="navbar">
     <ul>
         <li><a href="#home">Home</a></li>
+        <li><a href="#registry">Registry</a></li>
         <li><a href="#details">Details</a></li>
         <li><a href="#schedule">Schedule</a></li>
         <li><a href="#rsvp">RSVP</a></li>
+        <li><a href="index.html">Address Form</a></li>
     </ul>
 </nav>
 
@@ -670,6 +910,7 @@
         <div class="divider"></div>
         <p class="tagline">Celebrate with us</p>
         <p class="date">May 30, 2026</p>
+        <img src="floral-accent.png" class="hero-floral" alt="" aria-hidden="true">
     </div>
 </section>
 
@@ -697,6 +938,44 @@
     </div>
 </div>
 
+<section id="registry">
+    <div style="max-width: 1100px; margin: 0 auto; padding: 0 3rem;">
+        <h2>Registry</h2>
+        <p class="section-subtitle">Your presence is the greatest gift of all</p>
+        <p class="registry-intro">We're blessed to already have so much of what we need, but if you'd like to honor us with a gift, we are registered at Amazon and Target. We'd also welcome a contribution to some funds for our future life together, through Venmo.</p>
+
+        <div class="registry-grid">
+            <a href="https://www.target.com/gift-registry/gift/shaylee-and-paul" class="registry-card" target="_blank" rel="noopener">
+                <h3>Target</h3>
+                <p>View our registry</p>
+            </a>
+            <a href="https://www.amazon.com/wedding/guest-view/2IVX68D88TTI2" class="registry-card" target="_blank" rel="noopener">
+                <h3>Amazon</h3>
+                <p>View our registry</p>
+            </a>
+        </div>
+
+        <h3 class="fund-heading">Contribute to Our Future</h3>
+        <p class="fund-subtext">Via Venmo @Paul-Grayson</p>
+        <img src="venmo-qr.png" alt="Venmo QR code for @Paul-Grayson" style="display: block; margin: 0 auto 2.5rem; max-width: 180px;">
+
+        <div class="fund-grid">
+            <div class="fund-card">
+                <h4>Honeymoon</h4>
+                <p>Help us make memories on our first adventure as newlyweds</p>
+            </div>
+            <div class="fund-card">
+                <h4>House Fund</h4>
+                <p>Help us build a foundation for our future together</p>
+            </div>
+            <div class="fund-card">
+                <h4>Date Nights</h4>
+                <p>Help us keep the spark alive with evenings out together</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <div class="vision-section">
     <h2>Our Vision</h2>
     <div class="divider"></div>
@@ -707,9 +986,16 @@
     <h2>The Celebration</h2>
     <p class="section-subtitle">Join us for a day of love and laughter</p>
     <div class="details-grid">
-        <div class="detail-card">
+        <div class="detail-card" data-tier="family">
+            <h3>Luncheon</h3>
+            <strong>12:30 PM</strong>
+            <p>Shade Weddings and Events</p>
+            <p>435 S Geneva Rd</p>
+            <p>Orem, UT 84058</p>
+        </div>
+        <div class="detail-card" data-tier="ceremony">
             <h3>Ceremony</h3>
-            <strong>4:00 PM</strong>
+            <strong>3:30 PM</strong>
             <p>Shade Weddings and Events</p>
             <p>435 S Geneva Rd</p>
             <p>Orem, UT 84058</p>
@@ -728,28 +1014,33 @@
     <h2>The Day's Events</h2>
     <p class="section-subtitle">Here's what we have planned</p>
     <div class="schedule-timeline">
-        <div class="schedule-item">
-            <span class="time">2:00 PM</span>
+        <div class="schedule-item" data-tier="family">
+            <span class="time">12:30 PM</span>
             <h3>Luncheon</h3>
             <p>Join us for a meal before the festivities begin</p>
         </div>
-        <div class="schedule-item">
-            <span class="time">3:00 PM</span>
-            <h3>Photos</h3>
-            <p>We'll be taking photos with family and the wedding party</p>
-        </div>
-        <div class="schedule-item">
-            <span class="time">4:00 PM</span>
+        <div class="schedule-item" data-tier="ceremony">
+            <span class="time">3:30 PM</span>
             <h3>Ceremony</h3>
             <p>Come celebrate with us as we exchange vows surrounded by gardens and loved ones</p>
         </div>
         <div class="schedule-item">
-            <span class="time">6:00 PM</span>
-            <h3>Reception</h3>
-            <p>Dinner, toasts, cake, and lots of dancing</p>
+            <span class="time">6:00 – 7:30 PM</span>
+            <h3>Welcome &amp; Celebration</h3>
+            <p>Mingle, enjoy the evening, and help us celebrate the start of forever</p>
         </div>
         <div class="schedule-item">
-            <span class="time">9:00 PM</span>
+            <span class="time">7:30 – 8:00 PM</span>
+            <h3>Cake &amp; First Dances</h3>
+            <p>Cake cutting followed by our first dances as newlyweds</p>
+        </div>
+        <div class="schedule-item">
+            <span class="time">8:00 – 8:30 PM</span>
+            <h3>Dancing</h3>
+            <p>Hit the dance floor and celebrate with us</p>
+        </div>
+        <div class="schedule-item">
+            <span class="time">8:30 PM</span>
             <h3>Send-Off</h3>
             <p>A sparkler send-off under the stars</p>
         </div>
@@ -817,16 +1108,123 @@
     </div>
 </section>
 
+<div class="invite-code-section" id="inviteCodeSection">
+    <span class="invite-prompt" id="invitePrompt">Have an invitation code?</span>
+    <div class="invite-form" id="inviteForm">
+        <input type="text" id="inviteCodeInput" placeholder="Enter code" autocomplete="off">
+        <button type="button" id="inviteSubmit">Submit</button>
+    </div>
+    <div class="invite-status" id="inviteStatus"></div>
+</div>
+
 <footer>
+    <img src="floral-accent.png" class="footer-floral" alt="" aria-hidden="true">
     <p>We can't wait to celebrate with you!</p>
     <div class="divider"></div>
     <p>&copy; 2026 Shaylee & Paul · Orem, Utah</p>
 </footer>
 
 <script>
+    // Tier system
+    var CODES = {
+        'ceremony': 'ceremony',
+        'family': 'family'
+    };
+
+    var TIER_LEVELS = { 'reception': 0, 'ceremony': 1, 'family': 2 };
+
+    function getTier() {
+        var params = new URLSearchParams(window.location.search);
+        var invite = params.get('invite');
+        if (invite) {
+            var tier = CODES[invite.toLowerCase()];
+            if (tier) {
+                localStorage.setItem('weddingTier', tier);
+                return tier;
+            }
+        }
+        return localStorage.getItem('weddingTier') || 'reception';
+    }
+
+    function applyTier(tier) {
+        document.body.classList.remove('tier-ceremony', 'tier-family');
+        if (tier === 'ceremony' || tier === 'family') {
+            document.body.classList.add('tier-' + tier);
+        }
+        updateInviteUI(tier);
+    }
+
+    function updateInviteUI(tier) {
+        var prompt = document.getElementById('invitePrompt');
+        var form = document.getElementById('inviteForm');
+        var status = document.getElementById('inviteStatus');
+
+        if (tier === 'reception') {
+            prompt.style.display = '';
+            form.classList.remove('show');
+            status.innerHTML = '';
+        } else {
+            prompt.style.display = 'none';
+            form.classList.remove('show');
+            var label = tier === 'family' ? 'Family' : 'Ceremony';
+            status.innerHTML = label + ' access unlocked <span class="forget-link" id="forgetLink">forget code</span>';
+            document.getElementById('forgetLink').addEventListener('click', function() {
+                localStorage.removeItem('weddingTier');
+                // Remove invite param from URL without reload
+                var url = new URL(window.location);
+                url.searchParams.delete('invite');
+                window.history.replaceState({}, '', url);
+                applyTier('reception');
+            });
+        }
+    }
+
+    // Initialize tier on load
+    var currentTier = getTier();
+    applyTier(currentTier);
+
+    // Invite code prompt toggle
+    document.getElementById('invitePrompt').addEventListener('click', function() {
+        document.getElementById('inviteForm').classList.add('show');
+        document.getElementById('inviteCodeInput').focus();
+        this.style.display = 'none';
+    });
+
+    // Invite code submission
+    function submitInviteCode() {
+        var input = document.getElementById('inviteCodeInput');
+        var code = input.value.trim().toLowerCase();
+        var tier = CODES[code];
+        var status = document.getElementById('inviteStatus');
+
+        if (tier) {
+            localStorage.setItem('weddingTier', tier);
+            input.value = '';
+            applyTier(tier);
+            var details = document.getElementById('details');
+            var navHeight = document.getElementById('navbar').offsetHeight;
+            window.scrollTo({ top: details.offsetTop - navHeight, behavior: 'smooth' });
+        } else {
+            status.innerHTML = '<span class="invite-error">Code not recognized</span>';
+            setTimeout(function() {
+                if (status.querySelector('.invite-error')) {
+                    status.innerHTML = '';
+                }
+            }, 3000);
+        }
+    }
+
+    document.getElementById('inviteSubmit').addEventListener('click', submitInviteCode);
+    document.getElementById('inviteCodeInput').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            submitInviteCode();
+        }
+    });
+
     // Navbar scroll effect
     window.addEventListener('scroll', function() {
-        const navbar = document.getElementById('navbar');
+        var navbar = document.getElementById('navbar');
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
         } else {
@@ -838,7 +1236,7 @@
     document.getElementById('rsvpForm').addEventListener('submit', function(e) {
         e.preventDefault();
 
-        const formData = {
+        var formData = {
             name: document.getElementById('name').value,
             email: document.getElementById('email').value,
             attending: document.querySelector('input[name="entry.448583835"]:checked').value,
@@ -850,35 +1248,36 @@
         console.log('RSVP Submission:', formData);
 
         // Submit to Google Forms
-        const form = document.getElementById('rsvpForm');
-        const formDataToSend = new FormData(form);
+        var form = document.getElementById('rsvpForm');
+        var formDataToSend = new FormData(form);
 
         fetch(form.action, {
             method: 'POST',
             body: formDataToSend,
             mode: 'no-cors'
-        }).then(() => {
+        }).then(function() {
             // Show success message
-            const successMessage = document.getElementById('successMessage');
+            var successMessage = document.getElementById('successMessage');
             successMessage.classList.add('show');
 
             // Reset form
             form.reset();
 
             // Hide success message after 5 seconds
-            setTimeout(() => {
+            setTimeout(function() {
                 successMessage.classList.remove('show');
             }, 5000);
         });
     });
 
     // Smooth scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            const navHeight = document.getElementById('navbar').offsetHeight;
-            const targetPosition = target.offsetTop - navHeight;
+            var target = document.querySelector(this.getAttribute('href'));
+            if (!target) return;
+            var navHeight = document.getElementById('navbar').offsetHeight;
+            var targetPosition = target.offsetTop - navHeight;
 
             window.scrollTo({
                 top: targetPosition,
