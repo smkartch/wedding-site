@@ -208,6 +208,7 @@
 
         /* Marquee Photo Banner */
         .marquee-section {
+            display: none; /* Hidden until photos are added */
             background: var(--white);
             padding: 6rem 0 2rem;
             margin: 5rem 0 0;
@@ -803,7 +804,7 @@
         .fund-heading {
             text-align: center;
             font-size: 2rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 2.5rem;
             color: var(--dark);
             font-weight: 300;
         }
@@ -813,7 +814,8 @@
             color: var(--sage);
             font-size: 0.95rem;
             letter-spacing: 1px;
-            margin-bottom: 2.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 0.75rem;
         }
 
         .fund-grid {
@@ -956,8 +958,6 @@
         </div>
 
         <h3 class="fund-heading">Contribute to Our Future</h3>
-        <p class="fund-subtext">Via Venmo @Paul-Grayson</p>
-        <img src="venmo-qr.png" alt="Venmo QR code for @Paul-Grayson" style="display: block; margin: 0 auto 2.5rem; max-width: 180px;">
 
         <div class="fund-grid">
             <div class="fund-card">
@@ -973,6 +973,9 @@
                 <p>Help us keep the spark alive with evenings out together</p>
             </div>
         </div>
+
+        <p class="fund-subtext">Via Venmo @Paul-Grayson</p>
+        <img src="venmo-qr.png" alt="Venmo QR code for @Paul-Grayson" style="display: block; margin: 0 auto 2.5rem; max-width: 180px;">
     </div>
 </section>
 
