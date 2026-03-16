@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shaylee & Paul - May 30, 2026</title>
+    <title>Wedding - Shaylee & Paul</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -708,8 +708,23 @@
                 padding: 3rem 1.5rem;
             }
 
+            #registry > div {
+                padding: 0 1.5rem !important;
+            }
+
             .fund-grid {
                 grid-template-columns: 1fr;
+                gap: 1.25rem;
+                max-width: 100%;
+            }
+
+            .registry-grid {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+            }
+
+            .fund-card {
+                padding: 1.75rem 1.25rem;
             }
 
             .radio-group {
@@ -911,43 +926,46 @@
 
 <div class="marquee-section">
     <div class="marquee-container">
-        <!-- TODO: Reorder marquee photos to better alternate outfits -->
         <div class="marquee">
-            <div class="marquee-item"><img src="marquee/380A9297.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9091.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9430.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9187.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9384.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9042.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9525.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9256.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9460.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9119.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9364.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9215.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9502.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9143.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9392.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9274.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9377.jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9042_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9297_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9091_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9364_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9119_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9377_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9143_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9384_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9175_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9392_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9187_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9430_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9215_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9460_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9256_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9502_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9264_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9525_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9274_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
             <!-- Duplicated for seamless loop -->
-            <div class="marquee-item"><img src="marquee/380A9297.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9091.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9430.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9187.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9384.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9042.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9525.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9256.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9460.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9119.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9364.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9215.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9502.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9143.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9392.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9274.jpg" alt="Shaylee & Paul" loading="lazy"></div>
-            <div class="marquee-item"><img src="marquee/380A9377.jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9042_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9297_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9091_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9364_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9119_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9377_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9143_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9384_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9175_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9392_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9187_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9430_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9215_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9460_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9256_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9502_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9264_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9525_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
+            <div class="marquee-item"><img src="marquee-low-res/380A9274_(2048).jpg" alt="Shaylee & Paul" loading="lazy"></div>
         </div>
     </div>
 </div>
