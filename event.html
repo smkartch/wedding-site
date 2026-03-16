@@ -179,6 +179,33 @@
             letter-spacing: 1px;
         }
 
+        .parents-section {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 10rem;
+            text-align: center;
+        }
+
+        .parents-column h4 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--sage);
+            margin-bottom: 0.4rem;
+            font-weight: 400;
+        }
+
+        .parents-column p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--dark);
+            line-height: 1.6;
+            opacity: 0.85;
+        }
+
         .divider {
             width: 60px;
             height: 1px;
@@ -663,6 +690,14 @@
                 font-size: 1.4rem;
             }
 
+            .parents-section {
+                gap: 2.5rem;
+            }
+
+            .parents-column p {
+                font-size: 1rem;
+            }
+
             h2 {
                 font-size: 2.5rem;
             }
@@ -710,21 +745,6 @@
 
             #registry > div {
                 padding: 0 1.5rem !important;
-            }
-
-            .fund-grid {
-                grid-template-columns: 1fr;
-                gap: 1.25rem;
-                max-width: 100%;
-            }
-
-            .registry-grid {
-                grid-template-columns: 1fr;
-                max-width: 100%;
-            }
-
-            .fund-card {
-                padding: 1.75rem 1.25rem;
             }
 
             .radio-group {
@@ -898,6 +918,23 @@
                 transform: translateY(0);
             }
         }
+
+        @media (max-width: 768px) {
+            .fund-grid {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+                max-width: 100%;
+            }
+
+            .registry-grid {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+            }
+
+            .fund-card {
+                padding: 1.75rem 1.25rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -921,6 +958,16 @@
         <p class="tagline">Celebrate with us</p>
         <p class="date">May 30, 2026</p>
         <img src="floral-accent.png" class="hero-floral" alt="" aria-hidden="true">
+    </div>
+    <div class="parents-section">
+        <div class="parents-column">
+            <h4>Bride's Parents</h4>
+            <p>Sharon & Roger Kartchner</p>
+        </div>
+        <div class="parents-column">
+            <h4>Groom's Parents</h4>
+            <p>Bill & Kristine Grayson</p>
+        </div>
     </div>
 </section>
 
