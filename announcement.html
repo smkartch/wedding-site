@@ -474,23 +474,18 @@
         }
     });
 
-    // Form submission — update the action URL with your Zapier webhook
+    // Submit to Google Forms
     document.getElementById('downloadForm').addEventListener('submit', function(e) {
         e.preventDefault();
 
         var form = this;
-        var data = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value
-        };
+        var formData = new FormData();
+        formData.append('entry.1414648677', document.getElementById('name').value);
+        formData.append('entry.488202136', document.getElementById('email').value);
 
-        // TODO: Replace with your Zapier webhook URL
-        var ZAPIER_WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/YOUR_WEBHOOK_ID';
-
-        fetch(ZAPIER_WEBHOOK_URL, {
+        fetch('https://docs.google.com/forms/d/e/1FAIpQLSfNQfyJZqtr2wwaIDLaipAY_5AQjUuZy7h-BjM_op0smPv3uQ/formResponse', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
+            body: formData,
             mode: 'no-cors'
         }).then(function() {
             var successMessage = document.getElementById('successMessage');
