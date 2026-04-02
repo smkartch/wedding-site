@@ -357,7 +357,7 @@
 
         .detail-card p {
             margin: 0.5rem 0;
-            font-size: 1.05rem;
+        font-size: 1.05rem;
         }
 
         .detail-card strong {
@@ -883,32 +883,36 @@
             opacity: 0.8;
         }
 
-        /* Success Message */
-        .success-message {
-            display: none;
-            background: var(--sage);
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(-120%);
+            padding: 1rem 2rem;
+            border-radius: 4px;
             color: white;
-            padding: 1.5rem;
-            border-radius: 2px;
-            text-align: center;
-            margin-top: 2rem;
             font-size: 1.1rem;
+            font-family: 'Crimson Text', serif;
+            z-index: 10000;
+            opacity: 0;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            max-width: 90%;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
 
-        .success-message.show {
-            display: block;
-            animation: slideIn 0.5s ease;
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
         }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .toast.success {
+            background: var(--sage);
+        }
+
+        .toast.error {
+            background: #c0392b;
         }
 
         @media (max-width: 768px) {
@@ -938,6 +942,7 @@
     </style>
 </head>
 <body>
+<div id="toast" class="toast"></div>
 <nav id="navbar">
     <ul>
         <li><a href="#home">Home</a></li>
@@ -1181,9 +1186,6 @@
                 </div>
 
                 <button type="submit">Submit Response</button>
-                <div class="success-message" id="successMessage">
-                    Thank you for your response! We look forward to celebrating with you.
-                </div>
             </form>
             <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
         </div>
@@ -1207,6 +1209,18 @@
 </footer>
 
 <script>
+    function showToast(message, type) {
+        var toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = 'toast ' + type;
+        // Trigger reflow so the transition plays
+        toast.offsetHeight;
+        toast.classList.add('show');
+        setTimeout(function() {
+            toast.classList.remove('show');
+        }, 5000);
+    }
+
     // Tier system
     var CODES = {
         'ceremony': 'ceremony',
@@ -1338,17 +1352,10 @@
             body: formDataToSend,
             mode: 'no-cors'
         }).then(function() {
-            // Show success message
-            var successMessage = document.getElementById('successMessage');
-            successMessage.classList.add('show');
-
-            // Reset form
+            showToast('Thank you for your response! We look forward to celebrating with you.', 'success');
             form.reset();
-
-            // Hide success message after 5 seconds
-            setTimeout(function() {
-                successMessage.classList.remove('show');
-            }, 5000);
+        }).catch(function() {
+            showToast('Something went wrong. Please try again.', 'error');
         });
     });
 
